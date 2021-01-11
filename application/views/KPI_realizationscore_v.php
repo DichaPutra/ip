@@ -122,18 +122,39 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="box">
                                 <div class="box-header">
                                     <h3 class="box-title">List Departement</h3>
+                                    
+                                    <div class="col-md-3  pull-right">
+                                        <form method="post" action="<?php echo base_url(); ?>index.php/KPI_realizationscore_c">
+                                            <select class="form-control" name="tahun" onchange="this.form.submit();">
+                                                <?php
+                                                foreach ($tahunlist as $thn) {
+                                                    ?>
+                                                    <option 
+                                                        value="<?php echo $thn->periode; ?>"  
+                                                        <?php
+                                                        if ($tahun == $thn->periode) {
+                                                            echo 'selected';
+                                                        }
+                                                        ?>
+                                                        >
+                                                            <?php echo $thn->periode; ?>
+                                                    </option>
+                                                <?php } ?>
+                                            </select>
+                                        </form>
+                                    </div>
                                 </div>
                                 <!-- /.box-header -->
                                 <div class="box-body">
                                     <?php // echo $pesan; ?>
                                     <h2 class="text-center">Realization Score</h2>
-                                    <h4 class="text-center">Periode Tahun <?php echo date('Y'); ?></h4>
+                                    <h4 class="text-center">Periode Tahun <?php echo $tahun; ?></h4>
                                     <table id="example" class="table table-striped table-bordered nowrap" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>Division</th>
                                                 <th>Departement</th>
-                                                <th>Scoring Progress</th>
+                                                <!--<th>Scoring Progress</th>-->
                                                 <th>AVG Score</th>
                                                 <th>Action</th>
                                             </tr>
@@ -147,7 +168,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 <tr>
                                                     <td style="background-color:<?php echo $key->color; ?>" class="text-center"><strong><?php echo $key->namaDivisi; ?></strong></td>
                                                     <td><?php echo $key->namaDepartemen; ?></td>
-                                                    <td style="width: 30%">
+<!--                                                    <td style="width: 30%">
                                                         <?php $progress = round($key->countScore / $key->countDivisi * 100); ?>
                                                         <div class="progress text-center" >
                                                             <?php
@@ -164,7 +185,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             }
                                                             ?>
                                                         </div>
-                                                    </td>
+                                                    </td>-->
                                                     <td class="text-center" style="width: 10%"><?php echo $key->averageScore; ?></td>
                                                     <td>
                                                         <a href="<?php echo base_url(); ?>index.php/KPI_realizationscore_c/detailScore/<?php echo $key->id; ?>">
@@ -229,15 +250,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         <!-- page script -->
         <script>
-            $(document).ready(function() {
-                var table = $('#example').DataTable( {
-                    rowReorder: {
-                        selector: 'td:nth-child(2)'
-                    },
-                    responsive: true,
-                    "iDisplayLength": 50
-                } );
-            } );
+                                                $(document).ready(function () {
+                                                    var table = $('#example').DataTable({
+                                                        rowReorder: {
+                                                            selector: 'td:nth-child(2)'
+                                                        },
+                                                        responsive: true,
+                                                        "iDisplayLength": 50
+                                                    });
+                                                });
         </script>
 
         <!-- Optionally, you can add Slimscroll and FastClick plugins.

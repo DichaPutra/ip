@@ -142,6 +142,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                                 <th>No</th>
                                                 <th>Improvement</th>
+                                                <th>Periode</th>
                                                 <th>Kendala</th>
                                                 <th>Status</th>
                                                 <th>Progress</th>
@@ -165,6 +166,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         }
                                                         ?>
                                                     </td>
+                                                    <td><?php echo $key->periode; ?></td>
 
                                                     <td class="text-center">
                                                         <?php
@@ -220,7 +222,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         if ($setting3 == "off") {
                                                             echo '<b>< locked ><b>';
                                                         } elseif ($key->persentaseCapaian == 100) {
-                                                            echo '<b>< done ><b>';
+                                                            echo "selesai pada th $key->tahun_nilai_seratus";
                                                         } else {
                                                             ?>
                                                             <a href="#">
@@ -229,7 +231,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             <?php
                                                         }
                                                         ?>
-
                                                     </td>
 
 

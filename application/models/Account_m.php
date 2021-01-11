@@ -11,7 +11,7 @@ class Account_m extends CI_Model {
 
     function cekAccount($username) {
         // fungsi cekAkun return TRUE bila akun telah terdaftar
-        $query = $this->db->query("SELECT * FROM `account` WHERE username = '$username'");
+        $query = $this->db->query("SELECT * FROM `Account` WHERE username = '$username'");
         if ($query->result_array() != NULL) {
             //bila sudah terdaftar return TRUE
             return TRUE;
@@ -22,23 +22,23 @@ class Account_m extends CI_Model {
 
     function selectAccount($username) {
         //fungsi untuk pengambilan data Akun
-        $query = $this->db->query("SELECT * FROM `account` WHERE username = '$username'");
+        $query = $this->db->query("SELECT * FROM `Account` WHERE username = '$username'");
         return $query->result_array();
     }
 
     function selectDivisi($id) {
-        $query = $this->db->query("SELECT * FROM `divisi` WHERE Account_id = '$id'");
+        $query = $this->db->query("SELECT * FROM `Divisi` WHERE Account_id = '$id'");
         return $query->result_array();
     }
 
     function selectDepartemen($id) {
-        $query = $this->db->query("SELECT * FROM `departemen` WHERE Account_id = '$id'");
+        $query = $this->db->query("SELECT * FROM `Departemen` WHERE Account_id = '$id'");
         return $query->result_array();
     }
 
     function getPass($username) {
         // fungsi cekAkun return TRUE bila akun telah terdaftar
-        $query = $this->db->query("SELECT * FROM `account` WHERE username = '$username'");
+        $query = $this->db->query("SELECT * FROM `Account` WHERE username = '$username'");
         $data = $query->result_array();
         return $data[0][2];
     }

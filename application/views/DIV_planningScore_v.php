@@ -130,6 +130,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="box">
+
                                 <div class="box-header">
                                     <h3 class="box-title">List Department</h3>
                                     <a href="<?php echo base_url(); ?>/dist/formpenilaian/FormPenilaianDepartemen.xlsx" >
@@ -142,6 +143,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <!-- /.box-header -->
                                 <div class="box-body">
                                     <?php echo $pesan; ?>
+                                    
+                                    <!--dropdown pilih tahun-->
+                                    <div class="col-md-3  pull-right">
+                                        <form method="post" action="<?php echo base_url(); ?>index.php/DIV_planningScore_c">
+                                            <select class="form-control" name="tahun" onchange="this.form.submit();">
+                                                <?php
+                                                foreach ($tahunlist as $thn) {
+                                                    ?>
+                                                    <option value="<?php echo $thn->periode; ?>" <?php
+                                                    if ($tahun == $thn->periode) {
+                                                        echo 'selected';
+                                                    }
+                                                    ?>>
+                                                    <?php echo $thn->periode; ?>
+                                                    </option>
+                                                <?php } ?>
+                                            </select>
+                                        </form>
+                                    </div>
+                                    <br><br>
+
                                     <h2 class="text-center">Planning Score</h2>
                                     <h4 class="text-center">Periode Th <?php echo $tahun; ?></h4>
 
@@ -296,7 +318,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 </div>
                                             </div>
 
-                                        <?php } ?>
+<?php } ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -352,23 +374,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         <!-- page script -->
         <script>
-            $(document).ready(function() {
-                var table = $('#example').DataTable( {
-                    rowReorder: {
-                        selector: 'td:nth-child(2)'
-                    },
-                    responsive: true,
-                    "order": [[ 0, "asc" ]],
-                    "iDisplayLength": 50
-                } );
-            } );
+                                                                    $(document).ready(function () {
+                                                                        var table = $('#example').DataTable({
+                                                                            rowReorder: {
+                                                                                selector: 'td:nth-child(2)'
+                                                                            },
+                                                                            responsive: true,
+                                                                            "order": [[0, "asc"]],
+                                                                            "iDisplayLength": 50
+                                                                        });
+                                                                    });
         </script>
         <script>
-            function textCounter(field,field2,maxlimit)
+            function textCounter(field, field2, maxlimit)
             {
                 var countfield = document.getElementById(field2);
-                if ( field.value.length > maxlimit ) {
-                    field.value = field.value.substring( 0, maxlimit );
+                if (field.value.length > maxlimit) {
+                    field.value = field.value.substring(0, maxlimit);
                     return false;
                 } else {
                     countfield.value = maxlimit - field.value.length;

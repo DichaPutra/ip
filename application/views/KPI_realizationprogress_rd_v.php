@@ -155,7 +155,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 <tr>
                                                     <td class="text-center" style="width: 3%"><?php echo $no; ?></td>
                                                     <td>                                                        <!--<button type="button" class="btn btn-sm btn-primary" >Edit</button>-->
-                                                        <a data-toggle="modal" data-target="#Detil<?php echo $key->id; ?>"><?php echo $key->judul_improvement; ?></a>
+                                                        <a data-toggle="modal" data-target="#Detil<?php echo $key->id; ?>">
+                                                            <?php
+                                                            if (strlen($key->judul_improvement) > 75) {
+                                                                $ringkas = substr($key->judul_improvement, 0, 75);
+                                                                echo $ringkas."...";
+                                                                
+                                                            } else {
+                                                                echo $key->judul_improvement;
+                                                            }
+                                                            ?>
+                                                        </a>
                                                         <?php
                                                         if ($key->periode != date('Y')) {
                                                             echo "<span class=\"label label-warning\">Lanjutan</span>";
@@ -165,7 +175,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     <td style="width: 5%" class="text-center">
                                                         <?php
                                                         if ($key->kendalaRealisasi == NULL) {
-                                                            echo '<small>Tidak Ada Kendala</small>';
+                                                            echo '<small>Tidak Ada</small>';
                                                         } else {
                                                             ?>
                                                             <a data-toggle="modal" data-target="#Kendala<?php echo $key->id; ?>">

@@ -30,9 +30,12 @@ class DIV_realizationScore_c extends CI_Controller {
         if ($this->session->userdata('id') == NULL) {
             redirect(base_url());
         } else {
+            //set tahun menilai realisasi = tahun now - 1  (ini bakal berbeda beda tergantung menilai kapan divisnya be carefull
+            $year = date('Y') - 1;
+
             // megambil all data improvement
             $this->load->model('Departemen_m');
-            $this->datakirim['departemen'] = $this->Departemen_m->getDeptRealizationScore($this->idDivisi);
+            $this->datakirim['departemen'] = $this->Departemen_m->getDeptRealizationScore($this->idDivisi, $year);
 
             // pesan
             $this->datakirim['pesan'] = $this->pesan;
@@ -41,18 +44,21 @@ class DIV_realizationScore_c extends CI_Controller {
             $this->load->model('Setting_m');
             $this->datakirim['setting2'] = $this->Setting_m->getSettingStats("2");
 
+            //tahun header
+            $this->datakirim['year'] = $year;
+
             $this->load->view('DIV_realizationScore_v', $this->datakirim);
 
             // echo "ini controller dashboard Divisi | $this->userid , $this->nama | $this->idDivisi , $this->namaDivisi";
         }
     }
 
-    public function detailProgress($idDepartemen) {
+    public function detailProgress($idDepartemen,$year) {
         $this->load->model('Improvement_m');
-        $this->datakirim['improvement'] = $this->Improvement_m->getRealizationDiv($idDepartemen);
+        $this->datakirim['improvement'] = $this->Improvement_m->getRealizationDiv($idDepartemen,$year);
 
         //kirim tahunn & dep ID untuk print
-        $year = date('Y');
+//        $year = date('Y');
         $this->datakirim['tahun'] = $year;
         $this->datakirim['iddepartemen'] = $idDepartemen;
 
@@ -63,13 +69,17 @@ class DIV_realizationScore_c extends CI_Controller {
     }
 
     public function inputScore() {
+        //set tahun menilai realisasi = tahun now - 1  (ini bakal berbeda beda tergantung menilai kapan divisnya be carefull
+        $year = date('Y') - 1;
+
+
         $score = $this->input->post('score');
         $comments = $this->input->post('comments');
         $idDepartemen = $this->input->post('idDepartemen');
         // echo "iddepartemen = $idDepartemen | $score | $comments";
 
         $this->load->model('Realization_score_m');
-        $this->Realization_score_m->insertScore($idDepartemen, $score, $comments);
+        $this->Realization_score_m->insertScore($idDepartemen, $score, $comments, $year);
 
         $this->pesan = "<div class=\"alert alert-success\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\" title=\"close\">×</a> <strong>Success!</strong> Score berhasil ditambahkan</div>";
 

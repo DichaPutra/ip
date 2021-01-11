@@ -30,20 +30,30 @@ class DIV_planningScore_c extends CI_Controller {
         if ($this->session->userdata('id') == NULL) {
             redirect(base_url());
         } else {
+            if ($this->input->post('tahun') != NULL) {
+                $tahun = $this->input->post('tahun');
+            } else {
+                $tahun = date('Y');
+            }
+
+            //mengambil data tahun yang ada dalam database
+            $this->load->model('Improvement_m');
+            $this->datakirim['tahunlist'] = $this->Improvement_m->listTahun();
+            $this->datakirim['tahun'] = $tahun;
+            
             //tahun sekarang
-            $tahun = 2018;
-//            $tahun = date('Y');
-//            
+//            $tahun = date('Y') - 1; //ini dirubah karena harusnya menilainya di tahun yang sama saat membuat rencana improvement
+            
             // megambil all data improvement
             $this->load->model('Departemen_m');
-            $this->datakirim['departemen'] = $this->Departemen_m->getDepartemenPlanningScore($this->idDivisi, $tahun + 1);
+            $this->datakirim['departemen'] = $this->Departemen_m->getDepartemenPlanningScore($this->idDivisi, $tahun);
 
             //locking
             $this->load->model('Setting_m');
             $this->datakirim['setting1'] = $this->Setting_m->getSettingStats("1");
 
             // pesan
-            $this->datakirim['tahun'] = $tahun + 1;
+//            $this->datakirim['tahun'] = $tahun + 1;
             $this->datakirim['pesan'] = $this->pesan;
             $this->load->view('DIV_planningScore_v', $this->datakirim);
 

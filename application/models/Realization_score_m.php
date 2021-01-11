@@ -16,9 +16,9 @@ class Realization_score_m extends CI_Model {
         $query = $this->db->query("UPDATE `realization_score` SET  `score` =  '$score' WHERE `id`=$idScore ;");
     }
 
-    function insertScore($idDepartemen, $score, $comments) {
+    function insertScore($idDepartemen, $score, $comments, $year) {
         $idDivisi = $this->session->userdata('idDivisi');
-        $tahunPlanningScore = date('Y');
+        $tahunPlanningScore = $year;
 
         $query = $this->db->query("INSERT INTO `realization_score` (`id`, `Departemen_id`, `Divisi_id`, `score`, `periode`, `waktuInput`, `komentar`) 
             VALUES (NULL, '$idDepartemen', '$idDivisi', '$score', '$tahunPlanningScore', NOW(), '$comments');");

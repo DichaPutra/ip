@@ -66,23 +66,18 @@ class Improvement_m extends CI_Model {
         return $query->result();
     }
 
-    function getRealizatioDiv($depid) {
-        $tahun = date('Y');
-        $query = $this->db->query("SELECT * FROM `improvement` 
-            WHERE Departemen_id = $depid AND periode = '$tahun' OR 
-            Departemen_id = $depid AND persentaseCapaian != 100 AND periode < $tahun OR
-            Departemen_id = $depid AND tahun_nilai_seratus = $tahun
-                ");
-        return $query->result();
-    }
-
     // ========= [Controller REALIZATION SCORE] ===============
-    function getRealizationDiv($depid) {
-        $tahun = date('Y');
+    function getRealizationDiv($depid, $tahun) {
+//        $tahun = date('Y');
+//        SELECT * FROM `improvement` 
+//            WHERE Departemen_id = $depid AND periode = '$tahun' OR 
+//            Departemen_id = $depid AND persentaseCapaian != 100 AND periode < '$tahun' OR
+//            Departemen_id = $depid AND tahun_nilai_seratus = '$tahun'
+        
+        
         $query = $this->db->query("SELECT * FROM `improvement` 
-            WHERE Departemen_id = $depid AND periode = '$tahun' OR 
-            Departemen_id = $depid AND persentaseCapaian != 100 AND periode < $tahun OR
-            Departemen_id = $depid AND tahun_nilai_seratus = $tahun");
+            WHERE Departemen_id = $depid AND periode <= '$tahun'
+                ");
         return $query->result();
     }
 

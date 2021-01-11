@@ -25,15 +25,30 @@ class KPI_realizationscore_c extends CI_Controller {
         if ($this->session->userdata('id') == NULL) {
             redirect(base_url());
         } else {
+            if ($this->input->post('tahun') != NULL) {
+                $year = $this->input->post('tahun');
+            } else {
+                $year = date('Y');
+            }
+
+            $this->load->model('Improvement_m');
+            $this->datakirim['tahunlist'] = $this->Improvement_m->listTahun();
+            $this->datakirim['tahun'] = $year;
+
+//            $this->load->model('Departemen_m');
+//            $this->datakirim['departemen'] = $this->Departemen_m->kpiPlanningScore($year);
+//
+
+
             $this->load->model('Departemen_m');
-            $this->datakirim['departemen'] = $this->Departemen_m->kpiRealizationScore();
+            $this->datakirim['departemen'] = $this->Departemen_m->kpiRealizationScore($year);
 //
             $this->load->view('KPI_realizationscore_v', $this->datakirim);
         }
     }
 
     public function detailScore($idDepartemen) {
-         //echo "departemen : $idDepartemen";
+        //echo "departemen : $idDepartemen";
         //data to view
         $this->load->model('Departemen_m');
         $this->datakirim['departemen'] = $this->Departemen_m->getDepartemenByID($idDepartemen);

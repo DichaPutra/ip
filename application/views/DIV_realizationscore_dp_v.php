@@ -132,13 +132,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <div class="box-body">
                                     <?php // echo $pesan; ?>
                                     <h2 class="text-center"><?php echo $departemen; ?></h2>
-                                    <h4 class="text-center">Periode Tahun <?php echo date('Y'); ?></h4>
+                                    <h4 class="text-center">Periode Tahun <?php echo $tahun; ?></h4>
                                     <table id="example" class="table table-striped table-bordered nowrap" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
 
                                                 <th>No</th>
                                                 <th>Improvement</th>
+                                                <th>Periode</th>
                                                 <th>Kendala</th>
                                                 <th>Status</th>
                                                 <th>Progress</th>
@@ -160,6 +161,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         }
                                                         ?>
                                                     </td>
+                                                    <td class="text-center" style="width: 3%"><?php echo $key->periode; ?></td>
                                                     <td style="width: 5%" class="text-center">
                                                         <?php
                                                         if ($key->kendalaRealisasi == NULL) {

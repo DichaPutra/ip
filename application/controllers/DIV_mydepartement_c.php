@@ -41,12 +41,13 @@ class DIV_mydepartement_c extends CI_Controller {
     }
 
     public function inputProgress($idDepartemen) {
+        $year = date('Y');
         $this->load->model('Departemen_m');
         $this->datakirim['departemen'] = $this->Departemen_m->getDepartemenByID($idDepartemen);
         $this->datakirim['idDepartemen'] = $idDepartemen;
 
         $this->load->model('Improvement_m');
-        $this->datakirim['improvement'] = $this->Improvement_m->getRealizatioDiv($idDepartemen);
+        $this->datakirim['improvement'] = $this->Improvement_m->getRealizationDiv($idDepartemen,$year);
 
         //untuk parameter print
         $year = date('Y');

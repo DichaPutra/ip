@@ -53,8 +53,8 @@ class Departemen_m extends CI_Model {
     }
 
     // == [ REALIZATION SCORE ] ===================
-    function getDeptRealizationScore($divisiID) {
-        $tahunPlanningScore = date('Y');
+    function getDeptRealizationScore($divisiID , $year) {
+        $tahunPlanningScore = $year;
         $query = $this->db->query("
             SELECT a.id, a.namaDepartemen, b.namaDivisi, b.color,
             (SELECT score FROM realization_score WHERE Departemen_id = a.id AND Divisi_id = $divisiID AND periode = $tahunPlanningScore ) AS score,
@@ -102,8 +102,8 @@ class Departemen_m extends CI_Model {
         return $query->result();
     }
 
-    function kpiRealizationScore() {
-        $tahunPlanningScore = date('Y');
+    function kpiRealizationScore($year) {
+        $tahunPlanningScore = $year;
         $query = $this->db->query("SELECT a.id, a.namaDepartemen, b.namaDivisi, b.color,
             (SELECT COUNT( id ) FROM realization_score WHERE Departemen_id = a.id AND periode= $tahunPlanningScore) AS countScore, 
             (SELECT COUNT( id )-1 FROM divisi) AS countDivisi,

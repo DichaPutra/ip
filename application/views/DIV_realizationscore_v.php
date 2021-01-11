@@ -139,7 +139,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <div class="box-body">
                                     <?php echo $pesan; ?>
                                     <h2 class="text-center">Realization Score</h2>
-                                    <h4 class="text-center">Improvement Periode Th <?php echo date('Y'); ?></h4>
+                                    <h4 class="text-center">Improvement Periode Th <?php echo $year; ?></h4>
 
                                     <table id="example" class="table table-striped table-bordered nowrap" cellspacing="0" width="100%">
                                         <thead>
@@ -196,7 +196,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         } else {
                                                             if ($key->score != NULL) {
                                                                 ?>
-                                                                <a href="<?php echo base_url(); ?>index.php/DIV_realizationScore_c/detailProgress/<?php echo $key->id; ?>"><button type="button" class="btn btn-sm btn-default">Detail Progress</button></a>
+                                                                <a href="<?php echo base_url(); ?>index.php/DIV_realizationScore_c/detailProgress/<?php echo $key->id; ?>/<?php echo $year; ?>"><button type="button" class="btn btn-sm btn-default">Detail Progress</button></a>
                                                                 <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#editScore<?php echo $key->id; ?>">Edit Score</button>
                                                                 <a href="<?php echo base_url(); ?>index.php/DIV_realizationScore_c/deleteScore/<?php echo $key->idScore; ?>">
                                                                     <button type="button" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this score?');">&#x274c</button>
@@ -204,7 +204,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                                 <?php
                                                             } else {
                                                                 ?>
-                                                                <a href="<?php echo base_url(); ?>index.php/DIV_realizationScore_c/detailProgress/<?php echo $key->id; ?>"><button type="button" class="btn btn-sm btn-default">Detail Progress</button></a>
+                                                                <a href="<?php echo base_url(); ?>index.php/DIV_realizationScore_c/detailProgress/<?php echo $key->id; ?>/<?php echo $year; ?>"><button type="button" class="btn btn-sm btn-default">Detail Progress</button></a>
                                                                 <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#inputScore<?php echo $key->id; ?>">Input Score</button>
                                                                 <?php
                                                             }
